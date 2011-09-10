@@ -1,0 +1,5 @@
+This is a tool that makes working with staging and testing websites easier.
+
+The tool can:
+- make dumps of master, staging or testing databases
+- copy master database into staging or testing
