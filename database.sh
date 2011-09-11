@@ -29,7 +29,7 @@ function showhelp {
 #first and only parameter may be 'MASTER', 'STAGING' or 'TESTING'
 function backup_db {
 	
-	#getting variables from constants initialized above
+	#getting variables from constants initialized in config file
 	DB=`eval echo "$\`echo $1\`_DB"`
 	USR=`eval echo "$\`echo $1\`_USR"`
 	PASS=`eval echo "$\`echo $1\`_PASS"`
