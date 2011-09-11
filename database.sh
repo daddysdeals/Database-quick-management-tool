@@ -104,6 +104,17 @@ case "$1" in
 		mysql -u $STAGING_USR -p${STAGING_PASS} $STAGING_DB < $M_DB_FILENAME
 		if [ $? -eq 0 ]; then
 			echo "Database successfully copied"
+			
+			#variable not empty && file exists
+			if [ -n $POSTSTAGING_SQL ] && [ -f $POSTSTAGING_SQL ]; then
+				mysql -u $STAGING_USR -p${STAGING_PASS} $STAGING_DB < $POSTSTAGING_SQL
+				if [ $? -eq 0 ]; then
+					echo "Poststaging sql successfully applied"
+				else
+					echo "Poststaging sql failed"
+				fi
+			fi
+			
 			exit 0
 		else
 			echo "An problem happened copying db"
@@ -126,6 +137,17 @@ case "$1" in
 		mysql -u $TESTING_USR -p${TESTING_PASS} $TESTING_DB < $M_DB_FILENAME
 		if [ $? -eq 0 ]; then
 			echo "Database successfully copied"
+			
+			#variable not empty && file exists
+			if [ -n $POSTTESTING_SQL ] && [ -f $POSTTESTING_SQL ]; then
+				mysql -u $TESTING_USR -p${TESTING_PASS} $TESTING_DB < $POSTTESTING_SQL
+				if [ $? -eq 0 ]; then
+					echo "Posttesting sql successfully applied"
+				else
+					echo "Posttesting sql failed"
+				fi
+			fi
+			
 			exit 0
 		else
 			echo "An problem happened copying db"
